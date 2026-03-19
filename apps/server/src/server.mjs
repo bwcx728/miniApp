@@ -2041,9 +2041,28 @@ async function runSelfTest() {
   }
 }
 
+function startServer({ host = '0.0.0.0', listenPort = port, dbPath = defaultDbPath } = {}) {
+  const server = createServer({ dbPath });
+
+  const shutdown = () => {
+    server.close(() => {
+      process.exit(0);
+    });
+  };
+
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
+
+  server.listen(listenPort, host, () => {
+    console.log(`miniapp-server listening on http://127.0.0.1:${listenPort}`);
+  });
+
+  return server;
+}
+
 const isMainModule = Boolean(process.argv[1]) && import.meta.url === pathToFileURL(process.argv[1]).href;
 
-export { createServer, runSelfTest };
+export { createServer, runSelfTest, startServer };
 
 if (isMainModule) {
   if (process.argv.includes('--self-test')) {
@@ -2052,19 +2071,6 @@ if (isMainModule) {
       process.exit(1);
     });
   } else {
-    const server = createServer({ dbPath: defaultDbPath });
-
-    const shutdown = () => {
-      server.close(() => {
-        process.exit(0);
-      });
-    };
-
-    process.on('SIGINT', shutdown);
-    process.on('SIGTERM', shutdown);
-
-    server.listen(port, '0.0.0.0', () => {
-      console.log(`miniapp-server listening on http://127.0.0.1:${port}`);
-    });
+    startServer();
   }
 }

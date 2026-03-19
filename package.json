@@ -3,10 +3,13 @@
   "private": true,
   "version": "0.1.0",
   "description": "OpenClaw mini app workspace",
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "scripts": {
-    "dev:server": "node apps/server/src/server.mjs",
-    "start:server": "node apps/server/src/server.mjs",
-    "test:server": "node apps/server/src/server.mjs --self-test",
+    "dev:server": "node apps/server/src/cli.mjs",
+    "start:server": "node apps/server/src/cli.mjs",
+    "test:server": "node apps/server/src/cli.mjs --self-test",
     "check:docs": "node tools/check-docs.mjs",
     "check:weapp-contract": "node apps/weapp/scripts/contract-selfcheck.mjs"
   }

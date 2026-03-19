@@ -44,9 +44,23 @@ STAFF_OPEN_IDS=staff-openid-demo,staff-openid-lan
 
 ## 启动
 
+启动前请先确认 Node 版本满足 `>= 22.5.0`，因为当前实现使用了内置模块 `node:sqlite`。
+
+```bash
+node -v
+```
+
 ```bash
 npm run dev:server
 ```
+
+如果启动时看到：
+
+```text
+No such built-in module: node:sqlite
+```
+
+说明本机 Node 版本过低，请升级到 `Node 22 LTS` 或更高版本后再重试。
 
 ## 自测
 
