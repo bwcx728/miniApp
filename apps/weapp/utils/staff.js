@@ -1,9 +1,10 @@
 const { isDevelopEnv } = require('./customer');
 
 const STORAGE_KEY = 'miniapp.staffOpenId';
+const DEFAULT_DEVELOP_STAFF_OPENID = 'staff-openid-demo';
 
 function createMockStaffOpenId() {
-  return `mock-staff-openid-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+  return DEFAULT_DEVELOP_STAFF_OPENID;
 }
 
 function buildIdentity(openId) {
@@ -18,7 +19,7 @@ function buildIdentity(openId) {
     };
   }
 
-  const isMock = nextOpenId.indexOf('mock-staff-openid-') === 0;
+  const isMock = nextOpenId === DEFAULT_DEVELOP_STAFF_OPENID || nextOpenId.indexOf('mock-staff-openid-') === 0;
   return {
     openId: nextOpenId,
     source: isMock ? 'mock' : 'real',
@@ -68,6 +69,7 @@ function getStaffIdentityOrThrow() {
 
 module.exports = {
   STORAGE_KEY,
+  DEFAULT_DEVELOP_STAFF_OPENID,
   createMockStaffOpenId,
   ensureStaffIdentity,
   setStaffOpenId,

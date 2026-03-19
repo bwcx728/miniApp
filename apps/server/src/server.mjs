@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const port = Number(process.env.PORT || 3000);
 const defaultDbPath = process.env.DATABASE_PATH || path.join(__dirname, '..', 'data', 'miniapp.sqlite');
-const defaultStaffOpenId = 'staff-openid-v1';
+const defaultStaffOpenId = 'staff-openid-demo';
 const allowedStaffOpenIds = new Set(
   String(process.env.STAFF_OPEN_IDS || process.env.STAFF_OPEN_ID || defaultStaffOpenId)
     .split(',')
